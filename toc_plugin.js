@@ -61,7 +61,7 @@ function initTocGenerator() {
             var elementId = levelTwoHeading[i].getAttribute('id');
             var elementText = levelTwoHeading[i].textContent;
 
-            if(elementId !== null) {
+            if(filterHeader(levelTwoHeading[i])) {
                 headers.push({id: elementId, text: elementText});
             }
         }
@@ -115,5 +115,17 @@ function initTocGenerator() {
                 }, 1);
             }
         }
+    }
+
+
+
+    // must return true or false
+    function filterHeader(headerElement) {
+        ////header that has id attribute set is included
+        // return (headerElement.getAttribute('id') !== null);
+
+        // header that has id attribute set and starts with 'toc_' is included
+        var id = String(headerElement.getAttribute('id'));
+        return id.startsWith('toc_');
     }
 }
